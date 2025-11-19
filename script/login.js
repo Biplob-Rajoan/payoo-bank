@@ -6,7 +6,7 @@ document.getElementById('login-btn').addEventListener('click', function(event){
     if(accountNumber.length === 11){
         if(pin === '1234'){
             console.log('Login successful');
-            window.location.href = "./main.html";
+            // window.location.href = "./main.html";
         }else{
             alert('Incorrect PIN');
         }

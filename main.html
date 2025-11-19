@@ -13,7 +13,106 @@
   </head>
   <body class="bg-slate-800">
     <section class="max-w-md min-h-screen mx-auto py-6 bg-gray-200">
+      <header>
+        <nav class="flex justify-around items-center">
+          <img src="./assets/Group.png" class="w-16" alt="" />
+          <div>
+            <h1 class="text-3xl font-bold">$<span id="main-balance">400</span></h1>
+            <p class="border rounded p-1">Available Balance</p>
+          </div>
+          <button class="btn">Logout</button>
+        </nav>
 
+        <section class="mt-10">
+          <h1 class="text-2xl font-bold mb-2">Welcome to Payooo!</h1>
+          <p>
+            Enjoy easy and convenient financial services with us. Cashout charge
+            is low and
+          </p>
+        </section>
+
+        <div class="cards grid grid-cols-3 mt-14 gap-2 p-2 cursor-pointer">
+          <div id="add-money-box" class="box border p-4 text-center rounded-sm">
+            <img class="w-8 mx-auto" src="./assets/wallet1.png" alt="" />
+            <h3>Add Money</h3>
+          </div>
+          <div id="cashout-box" class="box border p-4 text-center rounded-sm">
+            <img class="w-8 mx-auto" src="./assets/wallet1.png" alt="" />
+            <h3>Cashout</h3>
+          </div>
+          <div class="box border p-4 text-center rounded-sm">
+            <img class="w-8 mx-auto" src="./assets/wallet1.png" alt="" />
+            <h3>Get Bonus</h3>
+          </div>
+          <div class="box border p-4 text-center rounded-sm">
+            <img class="w-8 mx-auto" src="./assets/wallet1.png" alt="" />
+            <h3>Transfer Money</h3>
+          </div>
+          <div class="box border p-4 text-center rounded-sm">
+            <img class="w-8 mx-auto" src="./assets/wallet1.png" alt="" />
+            <h3>Pay Bill</h3>
+          </div>
+          <div class="box border p-4 text-center rounded-sm">
+            <img class="w-8 mx-auto" src="./assets/wallet1.png" alt="" />
+            <h3>Transactions</h3>
+          </div>
+        </div>
+
+        <section id="add-money">
+          <h2>Add Money</h2>
+
+          <div class="">
+  <div class="hero-content flex-col lg:flex-row-reverse">
+    
+    <div class="card  w-full max-w-sm shrink-0 shadow-2xl">
+      <div class="card-body">
+
+        <legend>Select Bank</legend>
+        <select class="select">
+  <option disabled selected>Select Bank</option>
+  <option value="bkash">BKash</option>
+  <option value="nagad">Nagad</option>
+  <option value="ddbl">DDBL</option>
+</select>
+
+        <fieldset class="fieldset">
+          <label class="label">Account Number</label>
+          <input id="Account-number" type="number" class="input" value="12345678912" placeholder="Enter your account number" required/>
+          <label class="label">Amount</label>
+          <input id="amount" type="number" class="input"  placeholder="Enter your Amount" required/>
+          <label  class="label">PIN</label>
+          <input id="pin" type="number" class="input" placeholder="Enter your PIN" />
+          <div><a class="link link-hover">Forgot password?</a></div>
+          <button id="add-money" class="btn btn-neutral bg-blue-700 border-none mt-4">Add Money</button>
+        </fieldset>
+      </div>
+    </div>
+  </div>
+</div>
+
+        </section>
+
+
+        <section id="cashout">
+          <h2>Cashout</h2>
+
+          <fieldset class="fieldset">
+          <label class="label">Account Number</label>
+          <input id="Account-number" type="number" class="input" value="12345678912" placeholder="Enter your account number" required/>
+          <label class="label">Amount</label>
+          <input id="cashout-amount" type="number" class="input"  placeholder="Enter your Amount" required/>
+          <label  class="label">PIN</label>
+          <input id="cashout-pin" type="number" class="input" placeholder="Enter your PIN" />
+          <div><a class="link link-hover">Forgot password?</a></div>
+          <button id="cashout-btn" class="btn btn-neutral bg-blue-700 border-none mt-4">Cashout</button>
+        </fieldset>
+        </section>
+
+      </header>
     </section>
+
+    <script src="./script/addMoney.js"></script>
+    <script src="./script/toggle.js"></script>
+    <script src="./script/cashout.js"></script>
   </body>
 </html>
