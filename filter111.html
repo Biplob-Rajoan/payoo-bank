@@ -1,0 +1,161 @@
+<!-- Include Google Fonts -->
+<link
+  href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"
+  rel="stylesheet"
+/>
+<div class="taxonomy-filter-wrap">
+  <label for="taxonomy-dropdown">Filter by Category:</label>
+  <select id="taxonomy-dropdown">
+    <!-- Options will be populated by JS -->
+  </select>
+</div>
+<style>
+  .taxonomy-filter-wrap {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+    font-family: "Poppins", sans-serif;
+    /* Apply Poppins here */
+    font-size: xx-large;
+  }
+  .taxonomy-filter-wrap label {
+    font-size: 16px;
+    font-weight: 500;
+    text-transform: uppercase;
+    color: #002d72;
+    letter-spacing: 0px;
+    margin-bottom: 6px;
+    font-family: "Poppins", sans-serif; /* Ensure label uses Poppins */
+  }
+  .elementor-widget-taxonomy-filter {
+    display: none;
+
+  }
+  #taxonomy-dropdown {
+    padding: 10px;
+    font-size: 16px;
+    color: #002d72;
+    height: 50px;
+    border-color: #002d72;
+    border-radius: 6px;
+    max-width: 300px;
+    font-family: "Poppins", sans-serif; /* Apply Poppins to dropdown */
+  }
+  
+  /* Style the dropdown options */
+  #taxonomy-dropdown option {
+    padding: 18px 18px;
+    font-size: 55px;
+    font-weight: 100;
+    color: #002d72;
+    background-color: #ffffff;
+    line-height: 1.6;
+  }
+
+  /* Style the first option (All) */
+  #taxonomy-dropdown option:first-child {
+    font-weight: 800;
+    color: #434547;
+    background-color: #f8fafc;
+  }
+
+  /* Hover effect on options */
+  #taxonomy-dropdown option:hover {
+    background-color: #f0f7ff;
+    color: #0047ab;
+  }
+
+  /* Selected/checked option styling */
+  #taxonomy-dropdown option:checked {
+    background: linear-gradient(135deg, #002d72 0%, #0047ab 100%);
+    color: #da2323;
+    font-weight: 600;
+  }
+
+  /* Firefox specific styling */
+  @-moz-document url-prefix() {
+    #taxonomy-dropdown option:checked {
+      background-color: #002d72;
+      color: #ffffff;
+    }
+  }
+  
+  /* Mobile responsiveness */
+  @media (max-width: 768px) {
+    .taxonomy-filter-wrap {
+      margin-bottom: 8px;
+    }
+    .taxonomy-filter-wrap label {
+      font-size: 14px;
+    }
+    #taxonomy-dropdown {
+      font-size: 14px;
+      max-width: 100%;
+      width: 100%;
+      padding: 8px;
+      height: 45px;
+    }
+    #taxonomy-dropdown option {
+      padding: 10px 12px;
+      font-size: 14px;
+    }
+  }
+  @media (max-width: 480px) {
+    .taxonomy-filter-wrap label {
+      font-size: 13px;
+    }
+    #taxonomy-dropdown {
+      font-size: 13px;
+      padding: 7px;
+      height: 42px;
+    }
+    #taxonomy-dropdown option {
+      padding: 8px 10px;
+      font-size: 13px;
+    }
+  }
+</style>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    var taxonomyButtons = document.querySelectorAll(
+      ".elementor-widget-taxonomy-filter .e-filter-item"
+    );
+    var dropdown = document.getElementById("taxonomy-dropdown");
+    // Create "All" option and set it as default
+    var allOption = document.createElement("option");
+    allOption.value = "__all";
+    allOption.text = "All";
+    allOption.selected = true;
+    dropdown.appendChild(allOption);
+    // Populate other categories
+    taxonomyButtons.forEach(function (button) {
+      var filterValue = button.getAttribute("data-filter");
+      if (filterValue !== "__all") {
+        var option = document.createElement("option");
+        option.value = filterValue;
+        option.text = button.textContent;
+        dropdown.appendChild(option);
+      }
+    });
+    // Handle dropdown change
+    dropdown.addEventListener("change", function () {
+      var selectedFilter = this.value;
+      if (selectedFilter === "__all") {
+        // Show all items
+        taxonomyButtons.forEach(function (button) {
+          button.style.display = "";
+          button.click();
+        });
+      } else {
+        // Filter by selected category
+        taxonomyButtons.forEach(function (button) {
+          if (button.getAttribute("data-filter") === selectedFilter) {
+            button.click();
+          }
+        });
+      }
+    });
+    // Trigger initial "All" selection
+    allOption.dispatchEvent(new Event("change"));
+  });
+</script>

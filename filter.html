@@ -1,0 +1,203 @@
+<!-- Include Google Fonts -->
+<link
+  href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"
+  rel="stylesheet"
+/>
+
+<div class="taxonomy-filter-wrap">
+  <label for="taxonomy-dropdown">Filter by Category:</label>
+  <select id="taxonomy-dropdown">
+    <!-- Options will be populated by JS -->
+  </select>
+</div>
+
+<style>
+  .taxonomy-filter-wrap {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+    font-family: "Poppins", sans-serif;
+    /* Apply Poppins here */
+  }
+  .taxonomy-filter-wrap label {
+    font-size: 16px;
+    font-weight: 500;
+    text-transform: uppercase;
+    color: #002d72;
+    letter-spacing: 0px;
+    margin-bottom: 6px;
+    font-family: "Poppins", sans-serif; /* Ensure label uses Poppins */
+  }
+  .elementor-widget-taxonomy-filter {
+    display: none;
+  }
+  #taxonomy-dropdown {
+    padding: 10px;
+    font-size: 16px;
+    color: #002d72;
+    height: 50px;
+    border-color: #002d72;
+    border-radius: 6px;
+    max-width: 300px;
+    font-family: "Poppins", sans-serif; /* Apply Poppins to dropdown */
+  }
+
+
+
+  #taxonomy-dropdown {
+  padding: 12px 16px;
+  font-size: 16px;
+  color: #002d72;
+  background-color: #ffffff;
+  border: 2px solid #002d72;
+  border-radius: 8px;
+  max-width: 300px;
+  font-family: "Poppins", sans-serif;
+  appearance: none; /* Remove default arrow */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg fill='%23002d72' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+#taxonomy-dropdown:hover {
+  border-color: #0056b3;
+  box-shadow: 0 4px 12px rgba(0, 45, 114, 0.15);
+}
+
+#taxonomy-dropdown:focus {
+  outline: none;
+  border-color: #0056b3;
+  box-shadow: 0 0 0 3px rgba(0, 45, 114, 0.2);
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  #taxonomy-dropdown {
+    font-size: 14px;
+    padding: 10px 14px;
+    height: 45px;
+  }
+}
+
+@media (max-width: 480px) {
+  #taxonomy-dropdown {
+    font-size: 13px;
+    padding: 8px 12px;
+    height: 42px;
+  }
+}
+
+
+
+
+#taxonomy-dropdown option {
+  font-family: "Poppins", sans-serif; /* Apply Poppins font */
+  color: #002d72;                     /* Text color */
+  background-color: #f0f0f0;          /* Background color */
+  padding: 8px;                       /* Padding inside option */
+  font-size: 16px;                     /* Font size */
+}
+
+#taxonomy-dropdown option:hover {
+  background-color: #002d72;           /* Background color on hover */
+  color: #ffffff;                      /* Text color on hover */
+}
+
+
+
+
+
+
+
+
+
+
+  /* Mobile responsiveness */
+@media (max-width: 768px) {
+  .taxonomy-filter-wrap {
+    margin-bottom: 8px;
+  }
+
+  .taxonomy-filter-wrap label {
+    font-size: 14px;
+  }
+
+  #taxonomy-dropdown {
+    font-size: 14px;
+    max-width: 100%;
+    width: 100%;
+    padding: 8px;
+    height: 45px;
+  }
+}
+
+@media (max-width: 480px) {
+  .taxonomy-filter-wrap label {
+    font-size: 13px;
+  }
+
+  #taxonomy-dropdown {
+    font-size: 13px;
+    padding: 7px;
+    height: 42px;
+  }
+}
+
+
+
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    var taxonomyButtons = document.querySelectorAll(
+      ".elementor-widget-taxonomy-filter .e-filter-item"
+    );
+    var dropdown = document.getElementById("taxonomy-dropdown");
+
+    // Create "All" option and set it as default
+    var allOption = document.createElement("option");
+    allOption.value = "__all";
+    allOption.text = "All";
+    allOption.selected = true;
+    dropdown.appendChild(allOption);
+
+    // Populate other categories
+    taxonomyButtons.forEach(function (button) {
+      var filterValue = button.getAttribute("data-filter");
+      if (filterValue !== "__all") {
+        var option = document.createElement("option");
+        option.value = filterValue;
+        option.text = button.textContent;
+        dropdown.appendChild(option);
+      }
+    });
+
+    // Handle dropdown change
+    dropdown.addEventListener("change", function () {
+      var selectedFilter = this.value;
+      if (selectedFilter === "__all") {
+        // Show all items
+        taxonomyButtons.forEach(function (button) {
+          button.style.display = "";
+          button.click();
+        });
+      } else {
+        // Filter by selected category
+        taxonomyButtons.forEach(function (button) {
+          if (button.getAttribute("data-filter") === selectedFilter) {
+            button.click();
+          }
+        });
+      }
+    });
+
+    // Trigger initial "All" selection
+    allOption.dispatchEvent(new Event("change"));
+  });
+</script>
